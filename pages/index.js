@@ -15,7 +15,6 @@ export default function Home() {
     });
 
     urlRef.current.value = '';
-    console.log(res);
     getLinks();
   };
 
@@ -24,9 +23,9 @@ export default function Home() {
   }, []);
 
   const getLinks = () => {
-    fetch('https://upstash-edge-functions.netlify.app/test')
+    fetch('/api/get')
       .then((response) => response.json())
-      .then((json) => setLinks(json));
+      .then((json) => setLinks(json.links));
   };
   return (
     <div className="w-screen h-screen flex justify-center items-center">
