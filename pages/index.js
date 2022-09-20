@@ -10,7 +10,7 @@ export default function Home() {
 
     const data = JSON.stringify({ longUrl: longUrl });
 
-    const res = await axios.post('/api/shorten', data, {
+    await axios.post('/api/shorten', data, {
       headers: { 'Content-Type': 'application/json' },
     });
 

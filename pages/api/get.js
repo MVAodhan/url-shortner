@@ -1,7 +1,6 @@
-import { useRedis } from '../../utils/useRedis';
+import { getLinks } from '../../utils/getUtils';
 
 export default async function handler(req, res) {
-  const redis = useRedis();
-  const links = await redis.hgetall('links');
+  const links = await getLinks('links');
   res.status(200).send({ links });
 }

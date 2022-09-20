@@ -28,3 +28,15 @@ export async function getLink(code) {
 
   return link;
 }
+
+export async function getLinks(hash) {
+  const redis = useRedis();
+  const links = await redis.hgetall(hash);
+  return links;
+}
+
+export async function setLinks(hash, shortUrl, longUrl) {
+  const redis = useRedis();
+  const data = await redis.hset(hash, { [shortUrl]: longUrl });
+  return data;
+}
