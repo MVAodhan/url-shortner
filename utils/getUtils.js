@@ -1,19 +1,20 @@
 import { useRedis } from './useRedis';
 
 export const getShort = (longUrl) => {
-  let shortEnd = longUrl.split('/');
-  let slug = shortEnd[shortEnd.length - 1];
+  let urlSegments = longUrl.split('/');
+  let slug = urlSegments[urlSegments.length - 1];
   let slugSubstrings = slug.split('-');
   let letters = [];
   for (let string of slugSubstrings) {
     letters = [...letters, ...string];
   }
   let newSlug = [];
-  for (let i = 0; i <= 11; i++) {
-    let letter = letters[Math.floor(Math.random() * letters.length)];
-    if (i % 2 == 0) {
-      letter = letter.toUpperCase();
-    }
+  const allowedCharacters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  for (let i = 0; i <= 5; i++) {
+    let letter = allowedCharacters.charAt(
+      Math.floor(Math.random() * allowedCharacters.length)
+    );
     newSlug = [...newSlug, letter];
   }
   let newSlugJoin = newSlug.join('');
